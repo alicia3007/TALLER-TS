@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Series</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+    <style>
+        .header-bar {
+            background-color: #20B2AA;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+        .header-bar h4 {
+            margin: 0;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+        }
+        .tv-icon {
+            display: inline-block;
+            background-color: black;
+            color: white;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        .table th {
+            border-top: none;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .table td, .table th {
+            padding: 15px;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+        .series-name {
+            color: #007bff;
+            cursor: pointer;
+        }
+        .seasons-average {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: normal;
+            border-top: 1px solid #dee2e6;
+        }
+        .series-card {
+            margin-bottom: 20px;
+        }
+        .card-img-top {
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="header-bar">
+            <h4><span class="tv-icon">TV</span> TV Series</h4>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Channel</th>
+                                <th scope="col">Seasons</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td class="series-name" onclick="showDetails('breaking-bad')">Breaking Bad</td>
+                                <td>AMC</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="series-name" onclick="showDetails('orange')">Orange Is the New Black</td>
+                                <td>Netflix</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="series-name" onclick="showDetails('got')">Game of Thrones</td>
+                                <td>HBO</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="series-name" onclick="showDetails('tbbt')">The Big Bang Theory</td>
+                                <td>CBS</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="series-name" onclick="showDetails('sherlock')">Sherlock</td>
+                                <td>BBC</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td class="series-name" onclick="showDetails('scandal')">A Very English Scandal</td>
+                                <td>BBC</td>
+                                <td>2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="seasons-average">Seasons average: 6</div>
+                </div>
+                <div class="col-md-6">
+                    <div id="series-details">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const seriesData = {
+            'breaking-bad': {
+                name: 'Breaking Bad',
+                image: '/api/placeholder/400/320',
+                description: 'Set and filmed in Albuquerque, New Mexico, the series tells the story of Walter White, a struggling and depressed high school chemistry teacher who is diagnosed with lung cancer',
+                url: 'https://www.amc.com/shows/breaking-bad'
+            },
+            'orange': {
+                name: 'Orange Is the New Black',
+                image: '/api/placeholder/400/320',
+                description: 'The series revolves around Piper Chapman, a woman living in New York City who is sentenced to 15 months in a women\'s federal prison',
+                url: 'https://www.netflix.com/title/70242311'
+            },
+            'got': {
+                name: 'Game of Thrones',
+                image: '/api/placeholder/400/320',
+                description: 'Set on the fictional continents of Westeros and Essos, Game of Thrones has a large ensemble cast and follows several story arcs throughout the course of the show',
+                url: 'https://www.hbo.com/game-of-thrones'
+            },
+            'tbbt': {
+                name: 'The Big Bang Theory',
+                image: '/api/placeholder/400/320',
+                description: 'The show is centered on five characters living in Pasadena, California: Leonard Hofstadter and Sheldon Cooper, both physicists at Caltech',
+                url: 'https://www.cbs.com/shows/big_bang_theory/'
+            },
+            'sherlock': {
+                name: 'Sherlock',
+                image: '/api/placeholder/400/320',
+                description: 'A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London',
+                url: 'https://www.bbc.co.uk/programmes/b018ttws'
+            },
+            'scandal': {
+                name: 'A Very English Scandal',
+                image: '/api/placeholder/400/320',
+                description: 'British drama series based on the 1976–1979 Jeremy Thorpe scandal and John Preston\'s book of the same name',
+                url: 'https://www.bbc.co.uk/programmes/p065smy4'
+            }
+        };
+
+        function showDetails(seriesId) {
+            const series = seriesData[seriesId];
+            if (!series) return;
+            
+            const detailsHtml = `
+                <div class="card">
+                    <img class="card-img-top" src="${series.image}" alt="${series.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${series.name}</h5>
+                        <p class="card-text">${series.description}</p>
+                        <a href="${series.url}" class="text-primary">${series.url}</a>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('series-details').innerHTML = detailsHtml;
+        }
+    </script>
+</body>
+</html>
